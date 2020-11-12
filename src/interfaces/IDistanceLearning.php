@@ -1,6 +1,6 @@
 <?php
 
-namespace lesha724\DistanceLearning;
+namespace lesha724\DistanceLearning\interfaces;
 
 /**
  * Интейфейс для коннектор к дистанционному обучению
