@@ -1,0 +1,38 @@
+{
+    "name": "lesha724/mkp-distance-learning",
+    "description": "Синхронизация с дистанционным образованием",
+    "type": "library",
+    "keywords": ["MKP e-learning"],
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "require": {
+        "php" : ">=7.1",
+        "guzzle/guzzle": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.3",
+        "vimeo/psalm": "^4.1"
+    },
+    "config": {
+        "process-timeout": 1800,
+        "fxp-asset": {
+            "enabled": false
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "lesha724\\DistanceLearning\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "lesha724\\DistanceLearning\\tests\\": "tests/"
+        }
+    }
+}
