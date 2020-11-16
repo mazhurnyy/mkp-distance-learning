@@ -16,7 +16,7 @@ trait ObjectTrait
     public function setAttributes(array $values)
     {
         foreach ($values as $name => $value) {
-            if (isset($attributes[$name])) {
+            if (isset($this->$name)) {
                 $this->$name = $value;
             }
         }
