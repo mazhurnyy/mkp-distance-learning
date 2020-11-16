@@ -3,6 +3,7 @@
 namespace lesha724\DistanceLearning\models;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Response;
 use lesha724\DistanceLearning\interfaces\IDistanceLearning;
 use lesha724\DistanceLearning\throws\NullArgumentException;
 
@@ -22,7 +23,7 @@ abstract class BaseConnector extends BaseObject implements IDistanceLearning
      * ключ
      * @var string
      */
-    protected $_appKey;
+    protected $_token;
 
     /**
      * BaseConnector constructor.
@@ -31,15 +32,15 @@ abstract class BaseConnector extends BaseObject implements IDistanceLearning
      * @param array $config
      * @throws NullArgumentException
      */
-    public function __construct(string $host, string $appKey, array $config = [])
+    public function __construct(string $host, string $token, array $config = [])
     {
         if(empty($host))
             throw new NullArgumentException('Необходимо заполнить "host"');
-        if(empty($appKey))
+        if(empty($token))
             throw new NullArgumentException('Необходимо заполнить "appKey"');
 
         $this->_host = $host;
-        $this->_appKey = $appKey;
+        $this->_token = $token;
 
         parent::__construct($config);
     }
@@ -60,7 +61,7 @@ abstract class BaseConnector extends BaseObject implements IDistanceLearning
      */
     public function getToken() : string
     {
-        return $this->_appKey;
+        return $this->_token;
     }
 
     /**
@@ -69,18 +70,14 @@ abstract class BaseConnector extends BaseObject implements IDistanceLearning
      * @param string $type
      * @param array $params
      *
-     * @return void
+     * @return Response
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     protected function _sendQuery(string $uri, string $type = 'POST', array $params = []){
         $client = new Client();
-        $response = $client->request($type, $uri, [
+        return $client->request($type, $uri, [
             'query' => $params
         ]);
-        if($response->getStatusCode() != 200)
-        {
-
-        }
     }
     #endregion
 }

@@ -2,6 +2,8 @@
 
 namespace lesha724\DistanceLearning;
 
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Psr7\Message;
 use lesha724\DistanceLearning\interfaces\IStudent;
 use lesha724\DistanceLearning\models\BaseConnector;
 use lesha724\DistanceLearning\models\Course;
@@ -25,10 +27,20 @@ class Moodle extends BaseConnector
     /**
      * Список курсов
      * @return Course[]|void
+     * @throws throws\RequestException|\GuzzleHttp\Exception\GuzzleException
      */
     public function getCoursesList()
     {
-        // TODO: Implement getCoursesList() method.
+        $body = $this->_send('core_course_get_courses', 'GET');
+        $data = json_decode($body);
+        if(!is_array($data))
+            throw new throws\RequestException('Ошибка загрузки курсов moodle: Неверный формат ответа.');
+
+        $result = [];
+        foreach ($data as $course) {
+            $result[] = new Course($course);
+        }
+        return $result;
     }
 
     /**
@@ -73,5 +85,37 @@ class Moodle extends BaseConnector
     {
         // TODO: Implement validateEmail() method.
         throw new NotImplementedException();
+    }
+
+    /**
+     * Отправка запроса по методу
+     * @param string $method
+     * @param string $type
+     * @param array $params
+     * @return string
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws throws\RequestException
+     */
+    protected function _send(string $method, string $type = 'POST', array $params = []){
+        $params['wstoken']=$this->getToken();
+        $params['wsfunction']=$method;
+        $params['moodlewsrestformat']='json';
+
+        try {
+            $response = $this->_sendQuery($this->getHost().'/webservice/rest/server.php', $type, $params);
+            if($response->getStatusCode() == 200)
+                return $response->getBody()->getContents();
+
+            if($response->getStatusCode() == 204)
+                return null;
+
+        } catch (RequestException $e) {
+            if ($e->hasResponse())
+                throw new throws\RequestException(Message::toString($e->getResponse()));
+
+            throw new throws\RequestException(Message::toString($e->getRequest()));
+        } catch (\Exception $e) {
+            throw new throws\RequestException($e->getMessage());
+        }
     }
 }
