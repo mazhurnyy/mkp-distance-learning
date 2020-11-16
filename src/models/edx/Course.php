@@ -1,29 +1,46 @@
 <?php
 
-
-namespace lesha724\DistanceLearning\models\moodle;
+namespace lesha724\DistanceLearning\models\edx;
 
 use lesha724\DistanceLearning\interfaces\ICourse;
 use lesha724\DistanceLearning\models\BaseObject;
 
 /**
- * Моделька для курсов из moodle
+ * Моделька для курсов из edx
  * Class Course
- * @package lesha724\DistanceLearning\models\moodle
+ * @package lesha724\DistanceLearning\models
  */
 class Course extends BaseObject implements ICourse
 {
-    #region props
-    public $id;
+    /**
+     * @var int
+     */
+    public $course_id;
 
-    public $shortname;
+    /**
+     * @var string
+     */
+    public $name;
 
-    public $displayname;
+    /**
+     * @var object
+     */
+    public $media;
 
-    public $startdate;
+    /**
+     * @var string
+     */
+    public $short_description;
 
-    public $enddate;
-    #endregion
+    /**
+     * @var string
+     */
+    public $start;
+
+    /**
+     * @var string
+     */
+    public $end;
 
     #region Methods
     /**
@@ -32,7 +49,7 @@ class Course extends BaseObject implements ICourse
      */
     public function getId(): int
     {
-        return $this->id;
+        return $this->course_id;
     }
 
     /**
@@ -41,7 +58,7 @@ class Course extends BaseObject implements ICourse
      */
     public function getStartDate(): string
     {
-        return $this->startdate;
+        return $this->start;
     }
 
     /**
@@ -50,7 +67,7 @@ class Course extends BaseObject implements ICourse
      */
     public function getEndDate(): string
     {
-        return $this->enddate;
+        return $this->end;
     }
     #endregion
 }

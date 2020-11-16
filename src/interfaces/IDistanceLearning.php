@@ -2,8 +2,6 @@
 
 namespace lesha724\DistanceLearning\interfaces;
 
-use lesha724\DistanceLearning\models\Course;
-
 /**
  * Интерфейс для коннектор к дистанционному обучению
  * Interface IDistanceLearning
@@ -35,16 +33,9 @@ interface IDistanceLearning
     #region Course functions
     /**
      * Список курсов
-     * @return Course[]
+     * @return ICourse[]
      */
     public function getCoursesList();
-
-    /**
-     * Инфо по курсу по id
-     * @param int $courseId
-     * @return Course|null
-     */
-    public function getCourse(int $courseId) : Course;
 
     /**
      * Записать студента на курс

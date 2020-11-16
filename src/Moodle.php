@@ -6,7 +6,6 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Message;
 use lesha724\DistanceLearning\interfaces\IStudent;
 use lesha724\DistanceLearning\models\BaseConnector;
-use lesha724\DistanceLearning\models\Course;
 use lesha724\DistanceLearning\throws\NotImplementedException;
 
 /**
@@ -26,7 +25,7 @@ class Moodle extends BaseConnector
 
     /**
      * Список курсов
-     * @return Course[]|void
+     * @return models\moodle\Course[]|void
      * @throws throws\RequestException|\GuzzleHttp\Exception\GuzzleException
      */
     public function getCoursesList()
@@ -38,19 +37,9 @@ class Moodle extends BaseConnector
 
         $result = [];
         foreach ($data as $course) {
-            $result[] = new Course($course);
+            $result[] = new models\moodle\Course($course);
         }
         return $result;
-    }
-
-    /**
-     * @param int $courseId
-     * @return Course
-     *
-     */
-    public function getCourse(int $courseId): Course
-    {
-        // TODO: Implement getCourse() method.
     }
 
     /**
@@ -108,6 +97,8 @@ class Moodle extends BaseConnector
 
             if($response->getStatusCode() == 204)
                 return null;
+
+            return null;
 
         } catch (RequestException $e) {
             if ($e->hasResponse())
