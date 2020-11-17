@@ -23,11 +23,6 @@ class Course extends BaseObject implements ICourse
     public $name;
 
     /**
-     * @var object
-     */
-    public $media;
-
-    /**
      * @var string
      */
     public $short_description;
@@ -68,6 +63,24 @@ class Course extends BaseObject implements ICourse
     public function getEndDate(): string
     {
         return $this->end;
+    }
+
+    /**
+     * Название
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * Короткое описание
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return $this->short_description;
     }
     #endregion
 }

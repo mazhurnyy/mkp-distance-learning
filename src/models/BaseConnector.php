@@ -28,7 +28,7 @@ abstract class BaseConnector extends BaseObject implements IDistanceLearning
     /**
      * BaseConnector constructor.
      * @param string $host
-     * @param string $appKey
+     * @param string $token
      * @param array $config
      * @throws NullArgumentException
      */

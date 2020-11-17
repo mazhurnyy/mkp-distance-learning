@@ -1,6 +1,5 @@
 <?php
 
-
 namespace lesha724\DistanceLearning\models\moodle;
 
 use lesha724\DistanceLearning\interfaces\ICourse;
@@ -51,6 +50,24 @@ class Course extends BaseObject implements ICourse
     public function getEndDate(): string
     {
         return $this->enddate;
+    }
+
+    /**
+     * Короткое название
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->shortname;
+    }
+
+    /**
+     * полное название
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return $this->displayname;
     }
     #endregion
 }
