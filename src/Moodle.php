@@ -37,7 +37,13 @@ class Moodle extends BaseConnector
 
         $result = [];
         foreach ($data as $course) {
-            $result[] = new models\moodle\Course($course);
+            $result[] = new models\moodle\Course([
+                'id' => $course->id,
+                'shortname' => $course->shortname,
+                'displayname' => $course->displayname,
+                'startdate' => $course->startdate,
+                'enddate' => $course->enddate
+            ]);
         }
         return $result;
     }

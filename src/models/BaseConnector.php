@@ -37,7 +37,7 @@ abstract class BaseConnector extends BaseObject implements IDistanceLearning
         if(empty($host))
             throw new NullArgumentException('Необходимо заполнить "host"');
         if(empty($token))
-            throw new NullArgumentException('Необходимо заполнить "token"');
+            throw new NullArgumentException('Необходимо заполнить "appKey"');
 
         $this->_host = $host;
         $this->_token = $token;
