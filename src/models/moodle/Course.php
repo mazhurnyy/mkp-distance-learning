@@ -40,7 +40,7 @@ class Course extends BaseObject implements ICourse
      */
     public function getStartDate(): string
     {
-        return $this->startdate;
+        return $this->_convertTimestampToString($this->startdate);
     }
 
     /**
@@ -49,7 +49,7 @@ class Course extends BaseObject implements ICourse
      */
     public function getEndDate(): string
     {
-        return $this->enddate;
+        return $this->_convertTimestampToString($this->enddate);
     }
 
     /**
@@ -68,6 +68,21 @@ class Course extends BaseObject implements ICourse
     public function getDescription(): string
     {
         return $this->displayname;
+    }
+
+    /**
+     * конвертация timestamp
+     * @param int $timestamp
+     * @return false|string
+     */
+    protected function _convertTimestampToString($timestamp) {
+        if(empty($timestamp))
+            return '';
+
+        if(!is_int($timestamp))
+            return $timestamp;
+
+        return date('d.m.Y', $timestamp);
     }
     #endregion
 }
