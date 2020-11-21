@@ -24,6 +24,15 @@ class Moodle extends BaseConnector
     public $studentRoleId = 5;
 
     /**
+     * Moodle
+     * @return string
+     */
+    public function getType(): string
+    {
+        return self::TYPE_MOODLE;
+    }
+
+    /**
      * Список курсов
      * @return models\moodle\Course[]|void
      * @throws throws\RequestException|\GuzzleHttp\Exception\GuzzleException
@@ -37,6 +46,8 @@ class Moodle extends BaseConnector
 
         $result = [];
         foreach ($data as $course) {
+            if(empty($course->visible))
+                continue;
             $result[] = new models\moodle\Course([
                 'id' => $course->id,
                 'shortname' => $course->shortname,

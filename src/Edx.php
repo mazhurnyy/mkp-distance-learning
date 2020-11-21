@@ -16,6 +16,14 @@ class Edx extends BaseConnector
 {
     #region Methods
     /**
+     * EDX
+     * @return string
+     */
+    public function getType(): string
+    {
+        return self::TYPE_EDX;
+    }
+    /**
      * @return ICourse[]|void
      */
     public function getCoursesList()

@@ -12,15 +12,21 @@ interface IDistanceLearning
     #region Getters
     /**
      * Геттер для хоста
-     * @return mixed
+     * @return string
      */
     public function getHost() : string;
 
     /**
      * Геттер для Токена
-     * @return mixed
+     * @return string
      */
     public function getToken() : string;
+    
+    /**
+     * Тип
+     * @return string
+     */
+    public function getType() : string;
     #endregion
 
     /**

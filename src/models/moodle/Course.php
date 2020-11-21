@@ -84,5 +84,14 @@ class Course extends BaseObject implements ICourse
 
         return date('d.m.Y', $timestamp);
     }
+
+    /**
+     * 
+     * @return string
+     */
+    public function getUrl(): string
+    {
+        return '#';
+    }
     #endregion
 }

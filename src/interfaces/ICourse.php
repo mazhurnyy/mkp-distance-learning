@@ -19,4 +19,6 @@ interface ICourse
     public function getStartDate() : string;
 
     public function getEndDate() : string;
+    
+    public function getUrl() : string;
 }

@@ -82,5 +82,13 @@ class Course extends BaseObject implements ICourse
     {
         return $this->short_description;
     }
+
+    /**
+     * @return string
+     */
+    public function getUrl(): string
+    {
+        // TODO: Implement getUrl() method.
+    }
     #endregion
 }

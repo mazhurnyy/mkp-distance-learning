@@ -13,6 +13,10 @@ use lesha724\DistanceLearning\throws\NullArgumentException;
  */
 abstract class BaseConnector extends BaseObject implements IDistanceLearning
 {
+    const TYPE_MOODLE = 'moodle';
+    
+    const TYPE_EDX = 'edx';
+    
     /**
      * Хост
      * @var string
@@ -79,5 +83,14 @@ abstract class BaseConnector extends BaseObject implements IDistanceLearning
             'query' => $params
         ]);
     }
+
+    /**
+     * Какой тип дистанционного образования
+     * @return string
+     * 
+     * @see TYPE_MOODLE
+     * @see TYPE_EDX
+     */
+    public abstract function getType(): string;
     #endregion
 }
