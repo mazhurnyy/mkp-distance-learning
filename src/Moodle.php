@@ -147,8 +147,6 @@ class Moodle extends BaseConnector
         $body = $this->_send('core_user_get_users','GET',['criteria'=>$criteria]);
         $data = json_decode($body);
         $this->_processError($data);
-        if(!is_array($data))
-            throw new throws\RequestException('Ошибка загрузки курсов moodle: Неверный формат ответа 1.');
 
         if(!isset($data->users))
             throw new throws\RequestException('Ошибка загрузки курсов moodle: Неверный формат ответа 2.');
