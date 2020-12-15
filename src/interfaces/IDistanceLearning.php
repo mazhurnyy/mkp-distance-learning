@@ -60,10 +60,21 @@ interface IDistanceLearning
     public function unsubscribeToCourse(IStudent $student, int $courseId) : bool;
     #endregion
 
+
+    #region User
     /**
-     * Проверка существования пользователя дистанционного образования с таким email
-     * @param string $email
-     * @return bool
+     * Получить пользователя по параметрам
+     * @param array $params
+     * @return IUser[]
      */
-    public function validateEmail(string $email) : bool;
+    public function getUsers(array $params) : array;
+
+    /**
+     * Создание нового пользователя
+     * @param array $params
+     * @return IUser
+     */
+    public function createUser(array $params) : IUser;
+    #endregion
+
 }

@@ -5,7 +5,9 @@ namespace lesha724\DistanceLearning;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Message;
 use lesha724\DistanceLearning\interfaces\IStudent;
+use lesha724\DistanceLearning\interfaces\IUser;
 use lesha724\DistanceLearning\models\BaseConnector;
+use lesha724\DistanceLearning\models\moodle\User;
 use lesha724\DistanceLearning\throws\NotImplementedException;
 
 /**
@@ -32,15 +34,17 @@ class Moodle extends BaseConnector
         return self::TYPE_MOODLE;
     }
 
+    #region Courses
     /**
      * Список курсов
      * @return models\moodle\Course[]|void
-     * @throws throws\RequestException|\GuzzleHttp\Exception\GuzzleException
+     * @throws throws\RequestException
      */
     public function getCoursesList()
     {
         $body = $this->_send('core_course_get_courses', 'GET');
         $data = json_decode($body);
+        $this->_processError($data);
         if(!is_array($data))
             throw new throws\RequestException('Ошибка загрузки курсов moodle: Неверный формат ответа.');
 
@@ -86,12 +90,7 @@ class Moodle extends BaseConnector
         // TODO: Implement unsubscribeToCourse() method.
         throw new NotImplementedException();
     }
-
-    public function validateEmail(string $email): bool
-    {
-        // TODO: Implement validateEmail() method.
-        throw new NotImplementedException();
-    }
+    #endregion
 
     /**
      * Отправка запроса по методу
@@ -99,7 +98,6 @@ class Moodle extends BaseConnector
      * @param string $type
      * @param array $params
      * @return string
-     * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws throws\RequestException
      */
     protected function _send(string $method, string $type = 'POST', array $params = []){
@@ -125,5 +123,78 @@ class Moodle extends BaseConnector
         } catch (\Exception $e) {
             throw new throws\RequestException($e->getMessage());
         }
+    }
+
+    #region Users
+    /**
+     * Получить пользователя по параметрам
+     * @param array $params
+     * @return User[]
+     * @throws throws\RequestException
+     */
+    public function getUsers(array $params): array
+    {
+        if(empty($params))
+            throw new throws\RequestException('Не заданы параметры для поиска пользователя');
+
+        $criteria = [];
+        foreach ($params as $key => $value)
+            $criteria[] = [
+                'key'=>$key,
+                'value'=>$value
+            ];
+
+        $body = $this->_send('core_user_get_users','GET',['criteria'=>$criteria]);
+        $data = json_decode($body);
+        $this->_processError($data);
+        if(!is_array($data))
+            throw new throws\RequestException('Ошибка загрузки курсов moodle: Неверный формат ответа 1.');
+
+        if(!isset($data->users))
+            throw new throws\RequestException('Ошибка загрузки курсов moodle: Неверный формат ответа 2.');
+
+        $users = [];
+        foreach ($data->users as $user){
+            $users[] = new User([
+                'id' => $user->id,
+                'email' => $user->email
+            ]);
+        }
+        return $users;
+    }
+
+    /**
+     * Создание пользователя
+     * @param array $params
+     * @return IUser
+     * @throws throws\RequestException
+     */
+    public function createUser(array $params) : IUser {
+        $body = $this->_send('core_user_create_users','GET',['users'=>$params]);
+
+        $data = json_decode($body);
+        $this->_processError($data);
+        if(!is_array($data))
+            throw new throws\RequestException('Ошибка создания пользователя в moodle: Неверный формат ответа 1.');
+
+        if(count($data) > 1)
+            throw new throws\RequestException('Ошибка создания пользователя в moodle: Неверный формат ответа 2.');
+
+        return new User([
+            'id' => $data[0]->id,
+            'email' => $data[0]->email
+        ]);
+    }
+    #endregion
+
+    /**
+     * Анализ ошибки от мудла
+     * @param $data object|array
+     * @throws throws\RequestException
+     */
+    private function _processError($data)
+    {
+        if(isset($data->errorcode))
+            throw new throws\RequestException('Ошибка moodle: '.$data->message);
     }
 }

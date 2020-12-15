@@ -74,12 +74,11 @@ abstract class BaseConnector extends BaseObject implements IDistanceLearning
      * @param string $type
      * @param array $params
      *
-     * @return Response
+     * @return \Psr\Http\Message\ResponseInterface
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     protected function _sendQuery(string $uri, string $type = 'POST', array $params = []){
-        $client = new Client();
-        return $client->request($type, $uri, [
+        return (new Client())->request($type, $uri, [
             'query' => $params
         ]);
     }
