@@ -168,7 +168,7 @@ class Moodle extends BaseConnector
      * @throws throws\RequestException
      */
     public function createUser(array $params) : IUser {
-        $body = $this->_send('core_user_create_users','GET',['users'=>$params]);
+        $body = $this->_send('core_user_create_users','GET',['users'=>[$params]]);
 
         $data = json_decode($body);
         $this->_processError($data);
@@ -180,7 +180,7 @@ class Moodle extends BaseConnector
 
         return new User([
             'id' => $data[0]->id,
-            'email' => $data[0]->email
+            'email' => isset($params['email']) ? $params['email'] : ''
         ]);
     }
     #endregion
