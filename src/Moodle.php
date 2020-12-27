@@ -7,8 +7,10 @@ use GuzzleHttp\Psr7\Message;
 use lesha724\DistanceLearning\interfaces\IStudent;
 use lesha724\DistanceLearning\interfaces\IUser;
 use lesha724\DistanceLearning\models\BaseConnector;
-use lesha724\DistanceLearning\models\moodle\User;
+use lesha724\DistanceLearning\models\moodle\response\Cohort;
+use lesha724\DistanceLearning\models\moodle\response\User;
 use lesha724\DistanceLearning\throws\NotImplementedException;
+use lesha724\DistanceLearning\models\moodle\response\Course;
 
 /**
  * Class Moodle
@@ -37,7 +39,7 @@ class Moodle extends BaseConnector
     #region Courses
     /**
      * Список курсов
-     * @return models\moodle\Course[]|void
+     * @return Course[]|void
      * @throws throws\RequestException
      */
     public function getCoursesList()
@@ -52,7 +54,7 @@ class Moodle extends BaseConnector
         foreach ($data as $course) {
             if(empty($course->visible))
                 continue;
-            $result[] = new models\moodle\Course([
+            $result[] = new Course([
                 'id' => $course->id,
                 'shortname' => $course->shortname,
                 'displayname' => $course->displayname,
@@ -182,6 +184,17 @@ class Moodle extends BaseConnector
             'id' => $data[0]->id,
             'email' => isset($params['email']) ? $params['email'] : ''
         ]);
+    }
+    #endregion
+
+    #region Когорты
+    /**
+     * Создание когорт
+     * @param Cohort[] $cohorts
+     * @return array
+     */
+    public function createCohorts(array $cohorts) : array {
+
     }
     #endregion
 

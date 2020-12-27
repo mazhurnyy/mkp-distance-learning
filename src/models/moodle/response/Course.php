@@ -1,6 +1,6 @@
 <?php
 
-namespace lesha724\DistanceLearning\models\moodle;
+namespace lesha724\DistanceLearning\models\moodle\response;
 
 use lesha724\DistanceLearning\interfaces\ICourse;
 use lesha724\DistanceLearning\models\BaseObject;
