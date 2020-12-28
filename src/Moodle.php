@@ -271,6 +271,62 @@ class Moodle extends BaseConnector
 
         return new ResponseGroup($data[0]);
     }
+
+    /**
+     * Добавить участников группы
+     * @param int $groupId
+     * @param int[]|string $membersId
+     * @return bool
+     * @throws throws\RequestException
+     */
+    public function addGroupMembers(int $groupId, array $membersId) : bool
+    {
+        if(empty($groupId) || empty($membersId))
+            throw new throws\RequestException('Ошибка добавления участников группы в moodle: Не переданы необходимые параметры.');
+
+        $params = [];
+        foreach ($membersId as $id){
+            $params[] = [
+                'groupId' => $groupId,
+                'userid' => $id
+            ];
+        }
+
+        $body = $this->_send('core_group_add_group_members','POST',['members'=>[$params]]);
+        if(empty($body))
+            return true;
+
+        $data = json_decode($body);
+        $this->_processError($data);
+        return false;
+    }
+
+    /**
+     * Удалить участника из группы
+     * @param int $groupId
+     * @param int[] $membersId
+     * @return bool
+     * @throws throws\RequestException
+     */
+    public function deleteGroupMembers(int $groupId, array $membersId) : bool {
+        if(empty($groupId) || empty($membersId))
+            throw new throws\RequestException('Ошибка удаления участников когорт в moodle: Не переданы необходимые параметры.');
+
+        $params = [];
+        foreach ($membersId as $id){
+            $params[] = [
+                'groupId' => $groupId,
+                'userid' => $id
+            ];
+        }
+        $body = $this->_send('core_group_delete_group_members','POST',['members'=>$params]);
+        if(empty($body))
+            return true;
+
+        $data = json_decode($body);
+        $this->_processError($data);
+        return false;
+    }
     #endregion
 
     /**
