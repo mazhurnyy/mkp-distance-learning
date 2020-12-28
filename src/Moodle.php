@@ -2,6 +2,8 @@
 
 namespace lesha724\DistanceLearning;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Message;
 use lesha724\DistanceLearning\interfaces\IUser;
@@ -9,6 +11,8 @@ use lesha724\DistanceLearning\models\BaseConnector;
 use lesha724\DistanceLearning\models\moodle\request\Cohort as RequestCohort;
 use lesha724\DistanceLearning\models\moodle\response\AddCohortMembers;
 use lesha724\DistanceLearning\models\moodle\response\Cohort as ResponseCohort;
+use lesha724\DistanceLearning\models\moodle\response\Group as ResponseGroup;
+use lesha724\DistanceLearning\models\moodle\request\Group as RequestGroup;
 use lesha724\DistanceLearning\models\moodle\response\User;
 use lesha724\DistanceLearning\models\moodle\response\Course;
 
@@ -42,7 +46,7 @@ class Moodle extends BaseConnector
      * @return Course[]|void
      * @throws throws\RequestException
      */
-    public function getCoursesList()
+    public function getCoursesList(): array
     {
         $body = $this->_send('core_course_get_courses', 'GET');
         $data = json_decode($body);
@@ -75,6 +79,7 @@ class Moodle extends BaseConnector
      * @throws throws\RequestException
      */
     protected function _send(string $method, string $type = 'POST', array $params = []){
+        $params = [];
         $params['wstoken']=$this->getToken();
         $params['wsfunction']=$method;
         $params['moodlewsrestformat']='json';
@@ -94,6 +99,8 @@ class Moodle extends BaseConnector
                 throw new throws\RequestException(Message::toString($e->getResponse()));
 
             throw new throws\RequestException(Message::toString($e->getRequest()));
+        } catch (GuzzleException $e) {
+            throw new throws\RequestException($e->getMessage());
         } catch (\Exception $e) {
             throw new throws\RequestException($e->getMessage());
         }
@@ -163,22 +170,21 @@ class Moodle extends BaseConnector
     /**
      * Создание когорты
      * @param RequestCohort $cohort
-     * @return ResponseCohort[]
+     * @return ResponseCohort
      * @throws throws\RequestException
      */
-    public function createCohort(RequestCohort $cohort) : array {
-        $body = $this->_send('core_cohort_create_cohorts','GET',['cohorts'=>[$cohort->getAttributes()]]);
+    public function createCohort(RequestCohort $cohort) : ResponseCohort {
+        $body = $this->_send('core_cohort_create_cohorts','POST',['cohorts'=>[$cohort->getAttributes()]]);
 
         $data = json_decode($body);
         $this->_processError($data);
         if(!is_array($data))
             throw new throws\RequestException('Ошибка создания когорт в moodle: Неверный формат ответа 1.');
 
-        $result = [];
-        foreach ($data as $item){
-            $result[] = new ResponseCohort($item);
-        }
-        return $result;
+        if(count($data) > 1)
+            throw new throws\RequestException('Ошибка создания когорт в moodle: Неверный формат ответа 2.');
+
+        return  new ResponseCohort($data[0]);
     }
 
     /**
@@ -207,7 +213,7 @@ class Moodle extends BaseConnector
             ];
         }
 
-        $body = $this->_send('core_cohort_add_cohort_members','GET',['members'=>[$params]]);
+        $body = $this->_send('core_cohort_add_cohort_members','POST',['members'=>[$params]]);
 
         $data = json_decode($body);
         $this->_processError($data);
@@ -235,13 +241,35 @@ class Moodle extends BaseConnector
                 'userid' => $id
             ];
         }
-        $body = $this->_send('core_cohort_delete_cohort_members','GET',['members'=>$params]);
+        $body = $this->_send('core_cohort_delete_cohort_members','POST',['members'=>$params]);
         if(empty($body))
             return true;
 
         $data = json_decode($body);
         $this->_processError($data);
         return false;
+    }
+    #endregion
+
+    #region Группы
+    /**
+     * Создание группы
+     * @param RequestGroup $group
+     * @return ResponseGroup
+     * @throws throws\RequestException
+     */
+    public function createGroup(RequestGroup $group) : ResponseGroup{
+        $body = $this->_send('core_group_create_groups','POST',['groups'=>[$group->getAttributes()]]);
+
+        $data = json_decode($body);
+        $this->_processError($data);
+        if(!is_array($data))
+            throw new throws\RequestException('Ошибка создания группы в moodle: Неверный формат ответа 1.');
+
+        if(count($data) > 1)
+            throw new throws\RequestException('Ошибка создания группы в moodle: Неверный формат ответа 2.');
+
+        return new ResponseGroup($data[0]);
     }
     #endregion
 
