@@ -1,14 +1,10 @@
 <?php
 
-
 namespace lesha724\DistanceLearning;
 
-
 use lesha724\DistanceLearning\interfaces\ICourse;
-use lesha724\DistanceLearning\interfaces\IStudent;
 use lesha724\DistanceLearning\interfaces\IUser;
 use lesha724\DistanceLearning\models\BaseConnector;
-use lesha724\DistanceLearning\models\edx\User;
 use lesha724\DistanceLearning\throws\NotImplementedException;
 
 /**
@@ -33,23 +29,13 @@ class Edx extends BaseConnector
     {
         // TODO: Implement getCoursesList() method.
     }
-
-    public function subscribeToCourse(IStudent $student, int $courseId): bool
-    {
-        // TODO: Implement subscribeToCourse() method.
-    }
-
-    public function unsubscribeToCourse(IStudent $student, int $courseId): bool
-    {
-        // TODO: Implement unsubscribeToCourse() method.
-    }
     #endregion
 
     #region Users
     /**
      * Поиск пользователей
      * @param array $params
-     * @return User[]
+     * @return IUser[]
      * @throws NotImplementedException
      */
     public function getUsers(array $params): array

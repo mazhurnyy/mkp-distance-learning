@@ -4,12 +4,12 @@ namespace lesha724\DistanceLearning;
 
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Message;
-use lesha724\DistanceLearning\interfaces\IStudent;
 use lesha724\DistanceLearning\interfaces\IUser;
 use lesha724\DistanceLearning\models\BaseConnector;
-use lesha724\DistanceLearning\models\moodle\response\Cohort;
+use lesha724\DistanceLearning\models\moodle\request\Cohort as RequestCohort;
+use lesha724\DistanceLearning\models\moodle\response\AddCohortMembers;
+use lesha724\DistanceLearning\models\moodle\response\Cohort as ResponseCohort;
 use lesha724\DistanceLearning\models\moodle\response\User;
-use lesha724\DistanceLearning\throws\NotImplementedException;
 use lesha724\DistanceLearning\models\moodle\response\Course;
 
 /**
@@ -63,34 +63,6 @@ class Moodle extends BaseConnector
             ]);
         }
         return $result;
-    }
-
-    /**
-     * @param IStudent $student
-     * @param int $courseId
-     * @return bool
-     * @throws NotImplementedException
-     *
-     * @see $studentRoleId
-     */
-    public function subscribeToCourse(IStudent $student, int $courseId): bool
-    {
-        // TODO: Implement subscribeToCourse() method.
-        throw new NotImplementedException();
-    }
-
-    /**
-     * @param IStudent $student
-     * @param int $courseId
-     * @return bool
-     * @throws NotImplementedException
-     *
-     * @see $studentRoleId
-     */
-    public function unsubscribeToCourse(IStudent $student, int $courseId): bool
-    {
-        // TODO: Implement unsubscribeToCourse() method.
-        throw new NotImplementedException();
     }
     #endregion
 
@@ -189,12 +161,87 @@ class Moodle extends BaseConnector
 
     #region Когорты
     /**
-     * Создание когорт
-     * @param Cohort[] $cohorts
-     * @return array
+     * Создание когорты
+     * @param RequestCohort $cohort
+     * @return ResponseCohort[]
+     * @throws throws\RequestException
      */
-    public function createCohorts(array $cohorts) : array {
+    public function createCohort(RequestCohort $cohort) : array {
+        $body = $this->_send('core_cohort_create_cohorts','GET',['cohorts'=>[$cohort->getAttributes()]]);
 
+        $data = json_decode($body);
+        $this->_processError($data);
+        if(!is_array($data))
+            throw new throws\RequestException('Ошибка создания когорт в moodle: Неверный формат ответа 1.');
+
+        $result = [];
+        foreach ($data as $item){
+            $result[] = new ResponseCohort($item);
+        }
+        return $result;
+    }
+
+    /**
+     * Добавить участников когорты
+     * @param int $cohortId
+     * @param int[]|string $membersId
+     * @return AddCohortMembers
+     * @throws throws\RequestException
+     */
+    public function addCohortMembers(int $cohortId, array $membersId) : AddCohortMembers
+    {
+        if(empty($cohortId) || empty($membersId))
+            throw new throws\RequestException('Ошибка добавления участников когорт в moodle: Не переданы необходимые параметры.');
+
+        $params = [];
+        foreach ($membersId as $id){
+            $params[] = [
+                'cohorttype' => [
+                    'type' => 'id',
+                    'value' => $cohortId
+                ],
+                'usertype' => [
+                    'type' => 'id',
+                    'value' => $id
+                ]
+            ];
+        }
+
+        $body = $this->_send('core_cohort_add_cohort_members','GET',['members'=>[$params]]);
+
+        $data = json_decode($body);
+        $this->_processError($data);
+        if(!is_array($data))
+            throw new throws\RequestException('Ошибка добавления участников когорт в moodle: Неверный формат ответа 1.');
+
+        return new AddCohortMembers($data);
+    }
+
+    /**
+     * Удалить участника из когорты
+     * @param int $cohortId
+     * @param int[] $membersId
+     * @return bool
+     * @throws throws\RequestException
+     */
+    public function deleteCohortMembers(int $cohortId, array $membersId) : bool {
+        if(empty($cohortId) || empty($membersId))
+            throw new throws\RequestException('Ошибка удаления участников когорт в moodle: Не переданы необходимые параметры.');
+
+        $params = [];
+        foreach ($membersId as $id){
+            $params[] = [
+                'cohortid' => $cohortId,
+                'userid' => $id
+            ];
+        }
+        $body = $this->_send('core_cohort_delete_cohort_members','GET',['members'=>$params]);
+        if(empty($body))
+            return true;
+
+        $data = json_decode($body);
+        $this->_processError($data);
+        return false;
     }
     #endregion
 

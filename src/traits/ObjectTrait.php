@@ -1,6 +1,5 @@
 <?php
 
-
 namespace lesha724\DistanceLearning\traits;
 
 /**
@@ -18,11 +17,19 @@ trait ObjectTrait
     public function setAttributes($values)
     {
         $attributes = array_flip($this->attributes());
-        foreach ($values as $name => $value) {
-            if (isset($attributes[$name])) {
-                $this->$name = $value;
+        if(is_object($values))
+        {
+            foreach ($attributes as $attribute){
+                if(isset($values->$attribute))
+                    $this->$attribute = $values->$attribute;
             }
         }
+        if(is_array($values))
+            foreach ($values as $name => $value) {
+                if (isset($attributes[$name])) {
+                    $this->$name = $value;
+                }
+            }
     }
 
     /**
@@ -42,5 +49,17 @@ trait ObjectTrait
         }
 
         return $this::$_attributes;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAttributes(): array
+    {
+        $result = [];
+        foreach ($this->attributes() as $attribute) {
+            $result[$attribute] = $this->$attribute;
+        }
+        return $result;
     }
 }

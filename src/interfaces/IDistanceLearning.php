@@ -42,22 +42,6 @@ interface IDistanceLearning
      * @return ICourse[]
      */
     public function getCoursesList();
-
-    /**
-     * Записать студента на курс
-     * @param $student IStudent
-     * @param $courseId int
-     * @return mixed
-     */
-    public function subscribeToCourse(IStudent $student, int $courseId) : bool;
-
-    /**
-     * Отписать студента с курса
-     * @param $student IStudent
-     * @param $courseId int
-     * @return mixed
-     */
-    public function unsubscribeToCourse(IStudent $student, int $courseId) : bool;
     #endregion
 
 

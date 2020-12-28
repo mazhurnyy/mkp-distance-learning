@@ -1,8 +1,6 @@
 <?php
 
-
 namespace lesha724\DistanceLearning\models;
-
 
 use lesha724\DistanceLearning\traits\ObjectTrait;
 

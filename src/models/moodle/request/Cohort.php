@@ -1,18 +1,16 @@
 <?php
 
-namespace lesha724\DistanceLearning\models\moodle\response;
+namespace lesha724\DistanceLearning\models\moodle\request;
 
 use lesha724\DistanceLearning\models\BaseObject;
 
 /**
- * когорта
+ * Запрос для создания когорты
  * Class Cohort
- * @package lesha724\DistanceLearning\models\moodle
+ * @package lesha724\DistanceLearning\models\moodle\request
  */
 class Cohort extends BaseObject
 {
-    public $id;
-
     //cohort name
     public $name;
 
