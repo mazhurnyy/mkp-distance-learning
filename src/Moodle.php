@@ -2,7 +2,6 @@
 
 namespace lesha724\DistanceLearning;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Message;
@@ -67,6 +66,64 @@ class Moodle extends BaseConnector
             ]);
         }
         return $result;
+    }
+
+    /**
+     * Запись на курс
+     * @param int $courseId
+     * @param array $membersId
+     * @return bool
+     * @throws throws\RequestException
+     */
+    public function subscribeToCourse(int $courseId, array $membersId): bool
+    {
+        if(empty($courseId) || empty($membersId))
+            throw new throws\RequestException('Ошибка записи студентов на курс в moodle: Не переданы необходимые параметры.');
+
+        $params = [];
+        foreach ($membersId as $id){
+            $params[] = [
+                'roleid' => $this->studentRoleId,
+                'courseid' => $courseId,
+                'userid' => $id
+            ];
+        }
+        $body = $this->_send('enrol_manual_enrol_users','POST',['enrolments'=>$params]);
+        if(empty($body))
+            return true;
+
+        $data = json_decode($body);
+        $this->_processError($data);
+        return false;
+    }
+
+    /**
+     * Выписка с курса
+     * @param int $courseId
+     * @param array $membersId
+     * @return bool
+     * @throws throws\RequestException
+     */
+    public function unsubscribeToCourse(int $courseId, array $membersId): bool
+    {
+        if(empty($courseId) || empty($membersId))
+            throw new throws\RequestException('Ошибка записи студентов на курс в moodle: Не переданы необходимые параметры.');
+
+        $params = [];
+        foreach ($membersId as $id){
+            $params[] = [
+                'roleid' => $this->studentRoleId,
+                'courseid' => $courseId,
+                'userid' => $id
+            ];
+        }
+        $body = $this->_send('enrol_manual_unenrol_users','POST',['enrolments'=>$params]);
+        if(empty($body))
+            return true;
+
+        $data = json_decode($body);
+        $this->_processError($data);
+        return false;
     }
     #endregion
 
