@@ -21,13 +21,13 @@ abstract class BaseConnector extends BaseObject implements IDistanceLearning
      * Хост
      * @var string
      */
-    protected $_host;
+    protected $_host = '';
 
     /**
      * ключ
      * @var string
      */
-    protected $_token;
+    protected $_token = '';
 
     /**
      * BaseConnector constructor.
@@ -52,7 +52,7 @@ abstract class BaseConnector extends BaseObject implements IDistanceLearning
     #region methods
     /**
      * Геттер для хоста
-     * @return mixed
+     * @return string
      */
     public function getHost() : string
     {
@@ -61,7 +61,7 @@ abstract class BaseConnector extends BaseObject implements IDistanceLearning
 
     /**
      * Геттер для Токена
-     * @return mixed
+     * @return string
      */
     public function getToken() : string
     {

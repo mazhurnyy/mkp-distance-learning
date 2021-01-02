@@ -8,13 +8,13 @@ namespace lesha724\DistanceLearning\traits;
  */
 trait ObjectTrait
 {
-    protected static $_attributes;
+    protected static $_attributes = [];
 
     /**
     * Sets the attribute values in a massive way.
     * @param object|array $values attribute values (name => value) to be assigned to the model.
     */
-    public function setAttributes($values)
+    public function setAttributes($values) : void
     {
         $attributes = array_flip($this->attributes());
         if(is_object($values))
@@ -35,7 +35,7 @@ trait ObjectTrait
     /**
      * @return array
      */
-    public function attributes()
+    public function attributes(): array
     {
         if(!empty($this::$_attributes))
             return $this::$_attributes;

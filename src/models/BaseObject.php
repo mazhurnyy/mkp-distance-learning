@@ -40,7 +40,7 @@ class BaseObject
      * This method is invoked at the end of the constructor after the object is initialized with the
      * given configuration.
      */
-    public function init()
+    public function init() : void
     {
     }
 }

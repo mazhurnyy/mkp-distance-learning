@@ -16,9 +16,15 @@ interface ICourse
 
     public function getDescription() : string;
 
-    public function getStartDate() : string;
+    /**
+     * @return string|false
+     */
+    public function getStartDate();
 
-    public function getEndDate() : string;
+    /**
+     * @return string|false
+     */
+    public function getEndDate();
     
     public function getUrl() : string;
 }

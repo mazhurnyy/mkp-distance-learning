@@ -36,18 +36,18 @@ class Course extends BaseObject implements ICourse
 
     /**
      * Дата начала курса
-     * @return string
+     * @return string|false
      */
-    public function getStartDate(): string
+    public function getStartDate()
     {
         return $this->_convertTimestampToString($this->startdate);
     }
 
     /**
      * Дата окончания курса
-     * @return string
+     * @return string|false
      */
-    public function getEndDate(): string
+    public function getEndDate()
     {
         return $this->_convertTimestampToString($this->enddate);
     }
@@ -72,7 +72,7 @@ class Course extends BaseObject implements ICourse
 
     /**
      * конвертация timestamp
-     * @param int $timestamp
+     * @param int|string|null $timestamp
      * @return false|string
      */
     protected function _convertTimestampToString($timestamp) {

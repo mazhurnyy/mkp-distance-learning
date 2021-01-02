@@ -42,7 +42,7 @@ class Moodle extends BaseConnector
     #region Courses
     /**
      * Список курсов
-     * @return Course[]|void
+     * @return Course[]
      * @throws throws\RequestException
      */
     public function getCoursesList(): array
@@ -132,10 +132,11 @@ class Moodle extends BaseConnector
      * @param string $method
      * @param string $type
      * @param array $params
-     * @return string
+     * @return string| null
      * @throws throws\RequestException
      */
-    protected function _send(string $method, string $type = 'POST', array $params = []){
+    protected function _send(string $method, string $type = 'POST', array $params = []): ?string
+    {
         $params = [];
         $params['wstoken']=$this->getToken();
         $params['wsfunction']=$method;
@@ -247,7 +248,7 @@ class Moodle extends BaseConnector
     /**
      * Добавить участников когорты
      * @param int $cohortId
-     * @param int[]|string $membersId
+     * @param int[] $membersId
      * @return AddCohortMembers
      * @throws throws\RequestException
      */
@@ -332,7 +333,7 @@ class Moodle extends BaseConnector
     /**
      * Добавить участников группы
      * @param int $groupId
-     * @param int[]|string $membersId
+     * @param int[] $membersId
      * @return bool
      * @throws throws\RequestException
      */
@@ -391,7 +392,7 @@ class Moodle extends BaseConnector
      * @param $data object|array
      * @throws throws\RequestException
      */
-    private function _processError($data)
+    private function _processError($data) : void
     {
         if(isset($data->errorcode))
             throw new throws\RequestException('Ошибка moodle: '.$data->message);
