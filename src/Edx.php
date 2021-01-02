@@ -22,12 +22,36 @@ class Edx extends BaseConnector
     {
         return self::TYPE_EDX;
     }
+
+    #region Courses
     /**
      * @return ICourse[]|void
+     * @throws NotImplementedException
      */
     public function getCoursesList()
     {
-        // TODO: Implement getCoursesList() method.
+        throw new NotImplementedException();
+    }
+    /**
+     * @param int $courseId
+     * @param array $membersId
+     * @return bool
+     * @throws NotImplementedException
+     */
+    public function subscribeToCourse(int $courseId, array $membersId): bool
+    {
+        throw new NotImplementedException();
+    }
+
+    /**
+     * @param int $courseId
+     * @param array $membersId
+     * @return bool
+     * @throws NotImplementedException
+     */
+    public function unsubscribeToCourse(int $courseId, array $membersId): bool
+    {
+        throw new NotImplementedException();
     }
     #endregion
 
@@ -53,5 +77,6 @@ class Edx extends BaseConnector
     {
         throw new NotImplementedException();
     }
+    #endregion
     #endregion
 }
