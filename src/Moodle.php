@@ -57,6 +57,8 @@ class Moodle extends BaseConnector
         foreach ($data as $course) {
             if(empty($course->visible))
                 continue;
+            if(empty($course->id))
+                continue;
             $result[] = new Course([
                 'id' => $course->id,
                 'shortname' => $course->shortname,

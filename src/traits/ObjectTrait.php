@@ -37,18 +37,19 @@ trait ObjectTrait
      */
     public function attributes(): array
     {
-        if(!empty($this::$_attributes))
-            return $this::$_attributes;
-
         $class = new \ReflectionClass($this);
-        $this::$_attributes = [];
+        $className = $class->getName();
+        if(!empty(static::$_attributes[$className]))
+            return static::$_attributes[$className];
+
+        static::$_attributes[$className] = [];
         foreach ($class->getProperties(\ReflectionProperty::IS_PUBLIC) as $property) {
             if (!$property->isStatic()) {
-                $this::$_attributes[] = $property->getName();
+                static::$_attributes[$className][] = $property->getName();
             }
         }
 
-        return $this::$_attributes;
+        return static::$_attributes[$className];
     }
 
     /**
