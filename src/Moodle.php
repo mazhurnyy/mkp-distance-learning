@@ -139,7 +139,6 @@ class Moodle extends BaseConnector
      */
     protected function _send(string $method, string $type = 'POST', array $params = []): ?string
     {
-        $params = [];
         $params['wstoken']=$this->getToken();
         $params['wsfunction']=$method;
         $params['moodlewsrestformat']='json';
@@ -209,7 +208,7 @@ class Moodle extends BaseConnector
      * @throws throws\RequestException
      */
     public function createUser(array $params) : IUser {
-        $body = $this->_send('core_user_create_users','GET',['users'=>[$params]]);
+        $body = $this->_send('core_user_create_users','POST',['users'=>[$params]]);
 
         $data = json_decode($body);
         $this->_processError($data);

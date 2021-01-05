@@ -13,8 +13,6 @@ use lesha724\DistanceLearning\traits\ObjectTrait;
  */
 class User extends BaseObject implements IUser
 {
-    use ObjectTrait;
-
     public $id;
     public $email;
 
