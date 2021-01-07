@@ -16,7 +16,7 @@ trait ObjectTrait
     */
     public function setAttributes($values) : void
     {
-        $attributes = array_flip($this->attributes());
+        $attributes = $this->attributes();
         if(is_object($values))
         {
             foreach ($attributes as $attribute){
@@ -24,12 +24,14 @@ trait ObjectTrait
                     $this->$attribute = $values->$attribute;
             }
         }
-        if(is_array($values))
+        else if(is_array($values)) {
+            $attributes = array_flip($attributes);
             foreach ($values as $name => $value) {
                 if (isset($attributes[$name])) {
                     $this->$name = $value;
                 }
             }
+        }
     }
 
     /**

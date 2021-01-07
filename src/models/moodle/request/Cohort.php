@@ -25,4 +25,9 @@ class Cohort extends BaseObject
 
     //cohort visible
     public $visible = 1;
+
+    public $categorytype = [
+        'type' => 'system',
+        'value' => ''
+    ];
 }

@@ -243,7 +243,7 @@ class Moodle extends BaseConnector
         if(count($data) > 1)
             throw new throws\RequestException('Ошибка создания когорт в moodle: Неверный формат ответа 2.');
 
-        return  new ResponseCohort($data[0]);
+        return new ResponseCohort($data[0]);
     }
 
     /**
@@ -272,11 +272,11 @@ class Moodle extends BaseConnector
             ];
         }
 
-        $body = $this->_send('core_cohort_add_cohort_members','POST',['members'=>[$params]]);
+        $body = $this->_send('core_cohort_add_cohort_members','POST',['members'=>$params]);
 
         $data = json_decode($body);
         $this->_processError($data);
-        if(!is_array($data))
+        if(!isset($data->warnings) && !isset($data['warnings']))
             throw new throws\RequestException('Ошибка добавления участников когорт в moodle: Неверный формат ответа 1.');
 
         return new AddCohortMembers($data);
