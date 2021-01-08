@@ -11,6 +11,14 @@ trait ObjectTrait
     protected static $_attributes = [];
 
     /**
+     * @return array
+     */
+    /*public static function getAttributesMap(): array
+    {
+        return self::$_attributes;
+    }*/
+
+    /**
     * Sets the attribute values in a massive way.
     * @param object|array $values attribute values (name => value) to be assigned to the model.
     */
@@ -41,17 +49,17 @@ trait ObjectTrait
     {
         $class = new \ReflectionClass($this);
         $className = $class->getName();
-        if(!empty(static::$_attributes[$className]))
-            return static::$_attributes[$className];
+        if(!empty(self::$_attributes[$className]))
+            return self::$_attributes[$className];
 
-        static::$_attributes[$className] = [];
+        self::$_attributes[$className] = [];
         foreach ($class->getProperties(\ReflectionProperty::IS_PUBLIC) as $property) {
             if (!$property->isStatic()) {
                 static::$_attributes[$className][] = $property->getName();
             }
         }
 
-        return static::$_attributes[$className];
+        return self::$_attributes[$className];
     }
 
     /**

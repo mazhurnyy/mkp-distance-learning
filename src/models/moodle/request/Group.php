@@ -10,6 +10,8 @@ use lesha724\DistanceLearning\models\BaseObject;
  */
 class Group extends BaseObject
 {
+    public $name;
+    
     public $courseid;
 
     public $description;
