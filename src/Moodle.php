@@ -109,7 +109,7 @@ class Moodle extends BaseConnector
     public function unsubscribeToCourse(int $courseId, array $membersId): bool
     {
         if(empty($courseId) || empty($membersId))
-            throw new throws\RequestException('Ошибка записи студентов на курс в moodle: Не переданы необходимые параметры.');
+            throw new throws\RequestException('Ошибка выписки студентов с курса в moodle: Не переданы необходимые параметры.');
 
         $params = [];
         foreach ($membersId as $id){
@@ -120,7 +120,7 @@ class Moodle extends BaseConnector
             ];
         }
         $body = $this->_send('enrol_manual_unenrol_users','POST',['enrolments'=>$params]);
-        if(empty($body))
+        if(empty($body) || $body==='null')
             return true;
 
         $data = json_decode($body);
