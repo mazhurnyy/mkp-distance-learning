@@ -91,7 +91,7 @@ class Moodle extends BaseConnector
             ];
         }
         $body = $this->_send('enrol_manual_enrol_users','POST',['enrolments'=>$params]);
-        if(empty($body))
+        if(empty($body) || $body==='null')
             return true;
 
         $data = json_decode($body);
@@ -301,7 +301,7 @@ class Moodle extends BaseConnector
             ];
         }
         $body = $this->_send('core_cohort_delete_cohort_members','POST',['members'=>$params]);
-        if(empty($body))
+        if(empty($body) || $body==='null')
             return true;
 
         $data = json_decode($body);
@@ -346,13 +346,13 @@ class Moodle extends BaseConnector
         $params = [];
         foreach ($membersId as $id){
             $params[] = [
-                'groupId' => $groupId,
+                'groupid' => $groupId,
                 'userid' => $id
             ];
         }
 
-        $body = $this->_send('core_group_add_group_members','POST',['members'=>[$params]]);
-        if(empty($body))
+        $body = $this->_send('core_group_add_group_members','POST',['members'=>$params]);
+        if(empty($body) || $body==='null')
             return true;
 
         $data = json_decode($body);
@@ -374,12 +374,12 @@ class Moodle extends BaseConnector
         $params = [];
         foreach ($membersId as $id){
             $params[] = [
-                'groupId' => $groupId,
+                'groupid' => $groupId,
                 'userid' => $id
             ];
         }
         $body = $this->_send('core_group_delete_group_members','POST',['members'=>$params]);
-        if(empty($body))
+        if(empty($body) || $body==='null')
             return true;
 
         $data = json_decode($body);
