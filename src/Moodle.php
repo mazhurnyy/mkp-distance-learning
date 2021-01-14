@@ -332,6 +332,26 @@ class Moodle extends BaseConnector
     }
 
     /**
+     * Удаление группы
+     * @param int[] $groupsId
+     * @return bool
+     * @throws throws\RequestException
+     */
+    public function deleteGroups(array $groupsId) : bool {
+        if(empty($groupsId))
+            return false;
+
+        $body = $this->_send('core_group_delete_groups','POST',['groupids'=>[$groupsId]]);
+
+        if(empty($body) || $body==='null')
+            return true;
+
+        $data = json_decode($body);
+        $this->_processError($data);
+        return false;
+    }
+
+    /**
      * Добавить участников группы
      * @param int $groupId
      * @param int[] $membersId
