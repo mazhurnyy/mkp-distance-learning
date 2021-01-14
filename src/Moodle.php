@@ -341,7 +341,7 @@ class Moodle extends BaseConnector
         if(empty($groupsId))
             return false;
 
-        $body = $this->_send('core_group_delete_groups','POST',['groupids'=>[$groupsId]]);
+        $body = $this->_send('core_group_delete_groups','POST',['groupids'=>$groupsId]);
 
         if(empty($body) || $body==='null')
             return true;
