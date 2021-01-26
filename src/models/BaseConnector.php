@@ -79,7 +79,7 @@ abstract class BaseConnector extends BaseObject implements IDistanceLearning
      */
     protected function _sendQuery(string $uri, string $type = 'POST', array $params = []){
         return (new Client())->request($type, $uri, [
-            'query' => $params
+            ($type == 'POST' ? 'query' : 'json') => $params
         ]);
     }
 
