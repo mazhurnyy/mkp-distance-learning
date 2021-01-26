@@ -5,6 +5,7 @@ namespace lesha724\DistanceLearning;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Message;
+use GuzzleHttp\RequestOptions;
 use lesha724\DistanceLearning\interfaces\IUser;
 use lesha724\DistanceLearning\models\BaseConnector;
 use lesha724\DistanceLearning\models\moodle\request\Cohort as RequestCohort;
@@ -29,6 +30,8 @@ class Moodle extends BaseConnector
      * @see unsubscribeToCourse
      */
     public $studentRoleId = 5;
+
+    protected $_typePostParams = RequestOptions::FORM_PARAMS;
 
     /**
      * Moodle
@@ -139,12 +142,12 @@ class Moodle extends BaseConnector
      */
     protected function _send(string $method, string $type = 'POST', array $params = []): ?string
     {
-        $params['wstoken']=$this->getToken();
-        $params['wsfunction']=$method;
-        $params['moodlewsrestformat']='json';
+        $paramsQuery['wstoken']=$this->getToken();
+        $paramsQuery['wsfunction']=$method;
+        $paramsQuery['moodlewsrestformat']='json';
 
         try {
-            $response = $this->_sendQuery($this->getHost().'/webservice/rest/server.php', $type, $params);
+            $response = $this->_sendQuery($this->getHost().'/webservice/rest/server.php', $type, $paramsQuery, $params);
             if($response->getStatusCode() == 200)
                 return $response->getBody()->getContents();
 

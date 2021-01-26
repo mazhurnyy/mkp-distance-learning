@@ -3,9 +3,10 @@
 namespace lesha724\DistanceLearning\models;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\RequestOptions;
 use lesha724\DistanceLearning\interfaces\IDistanceLearning;
 use lesha724\DistanceLearning\throws\NullArgumentException;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class BaseConnector
@@ -28,6 +29,11 @@ abstract class BaseConnector extends BaseObject implements IDistanceLearning
      * @var string
      */
     protected $_token = '';
+
+    /**
+     * @var string
+     */
+    protected $_typePostParams = RequestOptions::JSON;
 
     /**
      * BaseConnector constructor.
@@ -72,15 +78,28 @@ abstract class BaseConnector extends BaseObject implements IDistanceLearning
      * Отправка запроса
      * @param string $uri
      * @param string $type
+     * @param array $paramsQuery
      * @param array $params
-     *
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    protected function _sendQuery(string $uri, string $type = 'POST', array $params = []){
-        return (new Client())->request($type, $uri, [
-            ($type == 'POST' ? 'query' : 'json') => $params
-        ]);
+    protected function _sendQuery(string $uri, string $type, array $paramsQuery, array $params = []) : ResponseInterface{
+        if($type == 'GET')
+        {
+            $paramsQuery = array_merge($paramsQuery, $params);
+            $params = [];
+        }
+
+        $uri.='?'.http_build_query($paramsQuery);
+
+        $queryData = [];
+        if($type == 'POST' && !empty($params)) {
+            $queryData = [
+                $this->_typePostParams => $params
+            ];
+        }
+
+        return (new Client())->request($type, $uri, $queryData);
     }
 
     /**
