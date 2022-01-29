@@ -62,7 +62,7 @@ class Course extends BaseObject implements ICourse
     }
 
     /**
-     * полное название
+     * Полное название
      * @return string
      */
     public function getDescription(): string

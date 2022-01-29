@@ -4,10 +4,9 @@ namespace lesha724\DistanceLearning\models\moodle\response;
 
 use lesha724\DistanceLearning\interfaces\IUser;
 use lesha724\DistanceLearning\models\BaseObject;
-use lesha724\DistanceLearning\traits\ObjectTrait;
 
 /**
- * Пользователь мудла
+ * Пользователь moodle
  * Class User
  * @package lesha724\DistanceLearning\models\moodle
  */

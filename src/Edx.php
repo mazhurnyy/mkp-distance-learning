@@ -25,7 +25,7 @@ class Edx extends BaseConnector
 
     #region Courses
     /**
-     * @return ICourse[]|void
+     * @return ICourse[]
      * @throws NotImplementedException
      */
     public function getCoursesList()

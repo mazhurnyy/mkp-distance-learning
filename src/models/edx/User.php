@@ -1,8 +1,6 @@
 <?php
 
-
 namespace lesha724\DistanceLearning\models\edx;
-
 
 use lesha724\DistanceLearning\interfaces\IUser;
 use lesha724\DistanceLearning\models\BaseObject;
@@ -22,6 +20,6 @@ class User extends BaseObject implements IUser
 
     public function getEmail(): string
     {
-        // TODO: Implement getEmail() method.
+        return '';
     }
 }

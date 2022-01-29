@@ -11,14 +11,6 @@ trait ObjectTrait
     protected static $_attributes = [];
 
     /**
-     * @return array
-     */
-    /*public static function getAttributesMap(): array
-    {
-        return self::$_attributes;
-    }*/
-
-    /**
     * Sets the attribute values in a massive way.
     * @param object|array $values attribute values (name => value) to be assigned to the model.
     */

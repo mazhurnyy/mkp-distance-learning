@@ -88,7 +88,7 @@ class Course extends BaseObject implements ICourse
      */
     public function getUrl(): string
     {
-        // TODO: Implement getUrl() method.
+        return '';
     }
     #endregion
 }
