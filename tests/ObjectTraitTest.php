@@ -16,7 +16,7 @@ use PHPUnit\Framework\TestCase;
 class ObjectTraitTest extends TestCase
 {
     /**
-     * получения полей со значениями
+     * Получения полей со значениями
      *
      * @see ObjectTrait::getAttributes()
      */
@@ -40,7 +40,7 @@ class ObjectTraitTest extends TestCase
     }
 
     /**
-     * получения списка полей
+     * Получения списка полей
      *
      * @see ObjectTrait::attributes()
      */

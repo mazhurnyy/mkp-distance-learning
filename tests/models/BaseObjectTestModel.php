@@ -1,8 +1,6 @@
 <?php
 
-
 namespace lesha724\DistanceLearning\tests\models;
-
 
 use lesha724\DistanceLearning\models\BaseObject;
 use lesha724\DistanceLearning\tests\BaseObjectTest;
@@ -23,7 +21,8 @@ class BaseObjectTestModel extends BaseObject
 
     protected $field4 = 'default4';
 
-    public function getField4() {
+    public function getField4(): string
+    {
         return $this->field4;
     }
 }

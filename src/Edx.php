@@ -28,7 +28,7 @@ class Edx extends BaseConnector
      * @return ICourse[]
      * @throws NotImplementedException
      */
-    public function getCoursesList()
+    public function getCoursesList(): array
     {
         throw new NotImplementedException();
     }

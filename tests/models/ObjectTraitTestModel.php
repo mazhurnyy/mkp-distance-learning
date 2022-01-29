@@ -24,11 +24,13 @@ class ObjectTraitTestModel
 
     private $field5 = 'default5';
 
-    public function getField4() {
+    public function getField4(): string
+    {
         return $this->field4;
     }
 
-    public function getField5() {
+    public function getField5(): string
+    {
         return $this->field5;
     }
 }
