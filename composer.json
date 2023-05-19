@@ -29,12 +29,12 @@
     ],
     "autoload": {
         "psr-4": {
-            "mazhurnyy\\DistanceLearning\\": "src"
+            "lesha724\\DistanceLearning\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "mazhurnyy\\DistanceLearning\\tests\\": "tests/"
+            "lesha724\\DistanceLearning\\tests\\": "tests/"
         }
     }
 }
