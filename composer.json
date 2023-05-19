@@ -7,7 +7,7 @@
     "version": "v1.0.0",
     "minimum-stability": "stable",
     "require": {
-        "php" : ">=7.3",
+        "php" : ">=8.0",
         "ext-json": "*",
         "guzzlehttp/guzzle": "^7.5"
     },
@@ -29,12 +29,12 @@
     ],
     "autoload": {
         "psr-4": {
-            "lesha724\\DistanceLearning\\": "src"
+            "mazhurnyy\\DistanceLearning\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "lesha724\\DistanceLearning\\tests\\": "tests/"
+            "mazhurnyy\\DistanceLearning\\tests\\": "tests/"
         }
     }
 }
