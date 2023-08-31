@@ -1,11 +1,11 @@
 <?php
 
 
-namespace lesha724\DistanceLearning\throws;
+namespace mazhurnyy\DistanceLearning\throws;
 
 /**
  * Class NotImplementedException
- * @package lesha724\DistanceLearning\throws
+ * @package mazhurnyy\DistanceLearning\throws
  */
 class NotImplementedException extends Exception
 {

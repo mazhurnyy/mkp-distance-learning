@@ -1,12 +1,12 @@
 <?php
 
-namespace lesha724\DistanceLearning\models;
+namespace mazhurnyy\DistanceLearning\models;
 
-use lesha724\DistanceLearning\traits\ObjectTrait;
+use mazhurnyy\DistanceLearning\traits\ObjectTrait;
 
 /**
  * Class BaseObject
- * @package lesha724\DistanceLearning\models
+ * @package mazhurnyy\DistanceLearning\models
  */
 class BaseObject
 {

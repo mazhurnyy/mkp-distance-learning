@@ -1,12 +1,12 @@
 <?php
 
-namespace lesha724\DistanceLearning\tests\models;
+namespace mazhurnyy\DistanceLearning\tests\models;
 
-use lesha724\DistanceLearning\traits\ObjectTrait;
+use mazhurnyy\DistanceLearning\traits\ObjectTrait;
 
 /**
  * Class ObjectTraitTestModel
- * @package lesha724\DistanceLearning\tests\models
+ * @package mazhurnyy\DistanceLearning\tests\models
  *
  * @see
  */

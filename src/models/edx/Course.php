@@ -1,14 +1,14 @@
 <?php
 
-namespace lesha724\DistanceLearning\models\edx;
+namespace mazhurnyy\DistanceLearning\models\edx;
 
-use lesha724\DistanceLearning\interfaces\ICourse;
-use lesha724\DistanceLearning\models\BaseObject;
+use mazhurnyy\DistanceLearning\interfaces\ICourse;
+use mazhurnyy\DistanceLearning\models\BaseObject;
 
 /**
  * Моделька для курсов из edx
  * Class Course
- * @package lesha724\DistanceLearning\models
+ * @package mazhurnyy\DistanceLearning\models
  */
 class Course extends BaseObject implements ICourse
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace lesha724\DistanceLearning\interfaces;
+namespace mazhurnyy\DistanceLearning\interfaces;
 
 /**
  * Интерфейс для коннектор к дистанционному обучению
  * Interface IDistanceLearning
- * @package lesha724\DistanceLearning
+ * @package mazhurnyy\DistanceLearning
  */
 interface IDistanceLearning
 {

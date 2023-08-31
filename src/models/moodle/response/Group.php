@@ -1,12 +1,12 @@
 <?php
 
-namespace lesha724\DistanceLearning\models\moodle\response;
+namespace mazhurnyy\DistanceLearning\models\moodle\response;
 
-use lesha724\DistanceLearning\models\BaseObject;
+use mazhurnyy\DistanceLearning\models\BaseObject;
 
 /**
  * Class Group
- * @package lesha724\DistanceLearning\models\moodle\response
+ * @package mazhurnyy\DistanceLearning\models\moodle\response
  */
 class Group extends BaseObject
 {

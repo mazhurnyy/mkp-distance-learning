@@ -1,11 +1,11 @@
 <?php
 
 
-namespace lesha724\DistanceLearning\throws;
+namespace mazhurnyy\DistanceLearning\throws;
 
 /**
  * Class NullArgumentException
- * @package lesha724\DistanceLearning\throws
+ * @package mazhurnyy\DistanceLearning\throws
  */
 class NullArgumentException extends Exception
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace lesha724\DistanceLearning\traits;
+namespace mazhurnyy\DistanceLearning\traits;
 
 /**
  * Trait ObjectTrait
- * @package lesha724\DistanceLearning\traits
+ * @package mazhurnyy\DistanceLearning\traits
  */
 trait ObjectTrait
 {

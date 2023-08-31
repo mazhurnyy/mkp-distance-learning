@@ -1,13 +1,13 @@
 <?php
 
-namespace lesha724\DistanceLearning\models\moodle\response;
+namespace mazhurnyy\DistanceLearning\models\moodle\response;
 
-use lesha724\DistanceLearning\models\BaseObject;
+use mazhurnyy\DistanceLearning\models\BaseObject;
 
 /**
  * когорта
  * Class Cohort
- * @package lesha724\DistanceLearning\models\moodle
+ * @package mazhurnyy\DistanceLearning\models\moodle
  */
 class Cohort extends BaseObject
 {

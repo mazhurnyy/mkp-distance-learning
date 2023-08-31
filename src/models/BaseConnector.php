@@ -1,16 +1,16 @@
 <?php
 
-namespace lesha724\DistanceLearning\models;
+namespace mazhurnyy\DistanceLearning\models;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
-use lesha724\DistanceLearning\interfaces\IDistanceLearning;
-use lesha724\DistanceLearning\throws\NullArgumentException;
+use mazhurnyy\DistanceLearning\interfaces\IDistanceLearning;
+use mazhurnyy\DistanceLearning\throws\NullArgumentException;
 use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class BaseConnector
- * @package lesha724\DistanceLearning\models
+ * @package mazhurnyy\DistanceLearning\models
  */
 abstract class BaseConnector extends BaseObject implements IDistanceLearning
 {

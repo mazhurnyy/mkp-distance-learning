@@ -1,15 +1,15 @@
 <?php
 
-namespace lesha724\DistanceLearning\tests;
+namespace mazhurnyy\DistanceLearning\tests;
 
-use lesha724\DistanceLearning\tests\models\ObjectTraitTestModel;
-use lesha724\DistanceLearning\tests\models\ObjectTraitTestModel2;
-use lesha724\DistanceLearning\traits\ObjectTrait;
+use mazhurnyy\DistanceLearning\tests\models\ObjectTraitTestModel;
+use mazhurnyy\DistanceLearning\tests\models\ObjectTraitTestModel2;
+use mazhurnyy\DistanceLearning\traits\ObjectTrait;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Class ObjectTraitTest
- * @package lesha724\DistanceLearning\tests
+ * @package mazhurnyy\DistanceLearning\tests
  *
  * @see ObjectTrait
  */

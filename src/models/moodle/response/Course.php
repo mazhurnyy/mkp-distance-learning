@@ -1,14 +1,14 @@
 <?php
 
-namespace lesha724\DistanceLearning\models\moodle\response;
+namespace mazhurnyy\DistanceLearning\models\moodle\response;
 
-use lesha724\DistanceLearning\interfaces\ICourse;
-use lesha724\DistanceLearning\models\BaseObject;
+use mazhurnyy\DistanceLearning\interfaces\ICourse;
+use mazhurnyy\DistanceLearning\models\BaseObject;
 
 /**
  * Моделька для курсов из moodle
  * Class Course
- * @package lesha724\DistanceLearning\models\moodle
+ * @package mazhurnyy\DistanceLearning\models\moodle
  */
 class Course extends BaseObject implements ICourse
 {

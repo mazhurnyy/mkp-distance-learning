@@ -1,15 +1,15 @@
 <?php
 
-namespace lesha724\DistanceLearning;
+namespace mazhurnyy\DistanceLearning;
 
-use lesha724\DistanceLearning\interfaces\ICourse;
-use lesha724\DistanceLearning\interfaces\IUser;
-use lesha724\DistanceLearning\models\BaseConnector;
-use lesha724\DistanceLearning\throws\NotImplementedException;
+use mazhurnyy\DistanceLearning\interfaces\ICourse;
+use mazhurnyy\DistanceLearning\interfaces\IUser;
+use mazhurnyy\DistanceLearning\models\BaseConnector;
+use mazhurnyy\DistanceLearning\throws\NotImplementedException;
 
 /**
  * Class Edx
- * @package lesha724\DistanceLearning
+ * @package mazhurnyy\DistanceLearning
  */
 class Edx extends BaseConnector
 {

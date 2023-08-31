@@ -1,13 +1,13 @@
 <?php
 
-namespace lesha724\DistanceLearning\tests\models;
+namespace mazhurnyy\DistanceLearning\tests\models;
 
-use lesha724\DistanceLearning\models\BaseObject;
-use lesha724\DistanceLearning\tests\BaseObjectTest;
+use mazhurnyy\DistanceLearning\models\BaseObject;
+use mazhurnyy\DistanceLearning\tests\BaseObjectTest;
 
 /**
  * Class BaseObjectTestModel
- * @package lesha724\DistanceLearning\tests\models
+ * @package mazhurnyy\DistanceLearning\tests\models
  *
  * @see BaseObjectTest
  */

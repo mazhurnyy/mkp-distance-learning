@@ -1,14 +1,14 @@
 <?php
 
-namespace lesha724\DistanceLearning\models\edx;
+namespace mazhurnyy\DistanceLearning\models\edx;
 
-use lesha724\DistanceLearning\interfaces\IUser;
-use lesha724\DistanceLearning\models\BaseObject;
+use mazhurnyy\DistanceLearning\interfaces\IUser;
+use mazhurnyy\DistanceLearning\models\BaseObject;
 
 /**
  * Пользователь Edx
  * Class User
- * @package lesha724\DistanceLearning\models\edx
+ * @package mazhurnyy\DistanceLearning\models\edx
  */
 class User extends BaseObject implements IUser
 {

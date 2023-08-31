@@ -1,11 +1,11 @@
 <?php
 
 
-namespace lesha724\DistanceLearning\interfaces;
+namespace mazhurnyy\DistanceLearning\interfaces;
 
 /**
  * Interface IUser
- * @package lesha724\DistanceLearning\interfaces
+ * @package mazhurnyy\DistanceLearning\interfaces
  */
 interface IUser
 {

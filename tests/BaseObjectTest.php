@@ -1,17 +1,17 @@
 <?php
 
 
-namespace lesha724\DistanceLearning\tests;
+namespace mazhurnyy\DistanceLearning\tests;
 
 
-use lesha724\DistanceLearning\models\BaseObject;
-use lesha724\DistanceLearning\tests\models\BaseObjectTestModel;
-use lesha724\DistanceLearning\traits\ObjectTrait;
+use mazhurnyy\DistanceLearning\models\BaseObject;
+use mazhurnyy\DistanceLearning\tests\models\BaseObjectTestModel;
+use mazhurnyy\DistanceLearning\traits\ObjectTrait;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Class BaseObjectTest
- * @package lesha724\DistanceLearning\tests
+ * @package mazhurnyy\DistanceLearning\tests
  *
  * @see BaseObject
  */

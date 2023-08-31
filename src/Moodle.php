@@ -1,24 +1,24 @@
 <?php
 
-namespace lesha724\DistanceLearning;
+namespace mazhurnyy\DistanceLearning;
 
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Message;
 use GuzzleHttp\RequestOptions;
-use lesha724\DistanceLearning\interfaces\IUser;
-use lesha724\DistanceLearning\models\BaseConnector;
-use lesha724\DistanceLearning\models\moodle\request\Cohort as RequestCohort;
-use lesha724\DistanceLearning\models\moodle\response\AddCohortMembers;
-use lesha724\DistanceLearning\models\moodle\response\Cohort as ResponseCohort;
-use lesha724\DistanceLearning\models\moodle\response\Group as ResponseGroup;
-use lesha724\DistanceLearning\models\moodle\request\Group as RequestGroup;
-use lesha724\DistanceLearning\models\moodle\response\User;
-use lesha724\DistanceLearning\models\moodle\response\Course;
+use mazhurnyy\DistanceLearning\interfaces\IUser;
+use mazhurnyy\DistanceLearning\models\BaseConnector;
+use mazhurnyy\DistanceLearning\models\moodle\request\Cohort as RequestCohort;
+use mazhurnyy\DistanceLearning\models\moodle\response\AddCohortMembers;
+use mazhurnyy\DistanceLearning\models\moodle\response\Cohort as ResponseCohort;
+use mazhurnyy\DistanceLearning\models\moodle\response\Group as ResponseGroup;
+use mazhurnyy\DistanceLearning\models\moodle\request\Group as RequestGroup;
+use mazhurnyy\DistanceLearning\models\moodle\response\User;
+use mazhurnyy\DistanceLearning\models\moodle\response\Course;
 
 /**
  * Class Moodle
- * @package lesha724\DistanceLearning
+ * @package mazhurnyy\DistanceLearning
  */
 class Moodle extends BaseConnector
 {

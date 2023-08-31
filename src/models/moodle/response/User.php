@@ -1,14 +1,14 @@
 <?php
 
-namespace lesha724\DistanceLearning\models\moodle\response;
+namespace mazhurnyy\DistanceLearning\models\moodle\response;
 
-use lesha724\DistanceLearning\interfaces\IUser;
-use lesha724\DistanceLearning\models\BaseObject;
+use mazhurnyy\DistanceLearning\interfaces\IUser;
+use mazhurnyy\DistanceLearning\models\BaseObject;
 
 /**
  * Пользователь moodle
  * Class User
- * @package lesha724\DistanceLearning\models\moodle
+ * @package mazhurnyy\DistanceLearning\models\moodle
  */
 class User extends BaseObject implements IUser
 {
