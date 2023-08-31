@@ -13,7 +13,7 @@
     },
     "require-dev": {
         "phpunit/phpunit": "*",
-        "vimeo/psalm": "^4.1"
+        "vimeo/psalm": "^5.15"
     },
     "config": {
         "process-timeout": 1800,
@@ -29,12 +29,12 @@
     ],
     "autoload": {
         "psr-4": {
-            "lesha724\\DistanceLearning\\": "src"
+            "mazhurnyy\\DistanceLearning\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "lesha724\\DistanceLearning\\tests\\": "tests/"
+            "mazhurnyy\\DistanceLearning\\tests\\": "tests/"
         }
     }
 }
