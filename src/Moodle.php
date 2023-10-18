@@ -201,6 +201,7 @@ class Moodle extends BaseConnector
                 'email' => $user->email
             ]);
         }
+
         return $users;
     }
 
@@ -226,6 +227,34 @@ class Moodle extends BaseConnector
             'email' => isset($params['email']) ? $params['email'] : ''
         ]);
     }
+
+    public function getUserCourse(array $params): array
+    {
+        if(empty($params))
+            throw new throws\RequestException('Не заданы параметры для поиска пользователя');
+
+        $userlist[0] = [
+            'userid' => $params['userid'],
+            'courseid' => $params['courseid'],
+        ];
+
+        $body = $this->_send('core_user_get_course_user_profiles','GET',['userlist'=>$userlist]);
+        $data = json_decode($body);
+        $this->_processError($data);
+
+        $users = [];
+        foreach ($data as $user){
+            $users[] = new User([
+                'id' => $user->id,
+                'email' => $user->email,
+                'group_id' => $user->groups[0]->id ?? null,
+                'group_name' => $user->groups[0]->name ?? null,
+            ]);
+        }
+
+        return $users;
+    }
+
     #endregion
 
     #region Когорты
