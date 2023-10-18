@@ -12,8 +12,10 @@ use mazhurnyy\DistanceLearning\models\BaseObject;
  */
 class User extends BaseObject implements IUser
 {
-    public $id;
-    public $email;
+    public int $id;
+    public string $email;
+    public ?int $group_id;
+    public ?string $group_name;
 
     public function getId(): int
     {
